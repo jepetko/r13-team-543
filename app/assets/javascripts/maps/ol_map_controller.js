@@ -377,13 +377,16 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
         div.css('cursor', 'pointer');
     };
 
-    $scope.flyToOwnLoc = function() {
+    $scope.flyToOwnLoc = function(callback) {
         function fly(geopos) {
             var coords = geopos.coords;
             var lonLat = new OpenLayers.LonLat(coords.longitude,coords.latitude);
             var tgtPos = $scope.toWebMercator(lonLat);
             $scope.zoomTo(tgtPos);
-        }
+            if( callback ) {
+                callback.apply(this, arguments);
+            }
+        };
         navigator.geolocation.getCurrentPosition(fly);
     };
 
@@ -409,6 +412,29 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                 "clazz_type": "AerialWithLabels",
                 "label" : "Bing Aerial Layer with Labels",
                 "type" : "base"} );
+            scope.flyToOwnLoc( function(geopos) {
+                var coords = geopos.coords;
+                scope.toggleLayer('wfs', {   "id" : "events",
+                    "name" : "Events",
+                    "clazz" : "Vector",
+                    "label" : "Events",
+                    "type" : "wfs",
+                    "url" : "/events.geojson?lon=" + coords.longitude + '&lat=' + coords.latitude,
+                    "checked" : "checked",
+                    "clustered" : true,
+                    "use_proxy" : false,
+                    "style" : {
+                        "pointRadius": "${radius}",
+                        "label": "${label}",
+                        "fillColor": "#FEE0D2",
+                        "fillOpacity": 0.8,
+                        "strokeColor": "#DE2D26",
+                        "fontColor": "#000000",
+                        "strokeWidth": 4,
+                        "strokeOpacity": 0.8
+                    }
+                }, true);
+            });
         }
     })($scope, $window), 2000);
 
