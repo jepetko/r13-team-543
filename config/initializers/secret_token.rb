@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Railsrumble::Application.config.secret_key_base = '502db53a9d0fa2d934f40b3dcd8df879bc97d0c6ed75a0ee9f1382ada896f602c67c98a748ddd108eb4e741a57ac8e3e61d7537e1c21eb45ccce52f32c662fc4'
+Railsrumble::Application.config.secret_key_base = 'f8c19ab07c1261a5b687f200840369661ff55409868e4459d516a1ca7f40d018d44130897e547077b8d49b8f679dcbf974e315abb3a67b4c659b19d62410dc77'
