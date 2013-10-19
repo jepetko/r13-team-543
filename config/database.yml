@@ -4,7 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  adapter: postgis
+  adapter: postgresql
   #postgis_extension: true
   encoding: unicode
   database: railsrumble_development
@@ -12,29 +12,26 @@ development:
   host: localhost
   username: railsrumble
   password: railsrumble
-  su_username: geo_database_creator
-  su_password: g3o*
-  schema_search_path: "public,postgis"
-  script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
-
-  #schema_search_path: "public"
-  #postgis_extension: "postgis,postgis_topology"
+  #su_username: geo_database_creator
+  #su_password: g3o*
+  #schema_search_path: "public,postgis"
+  #script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: postgis
+  adapter: postgresql
   encoding: unicode
   database: railsrumble_test
   pool: 5
   host: localhost
   username: railsrumble
   password: railsrumble
-  su_username: geo_database_creator
-  su_password: g3o*
-  schema_search_path: "public,postgis"
-  script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
+  #su_username: geo_database_creator
+  #su_password: g3o*
+  #schema_search_path: "public,postgis"
+  #script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
 
 production:
   adapter: postgresql
@@ -44,10 +41,10 @@ production:
   host: localhost
   username: railsrumble
   password: railsrumble
-  su_username: geo_database_creator
-  su_password: g3o*
-  schema_search_path: "public,postgis"
-  script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
+  #su_username: geo_database_creator
+  #su_password: g3o*
+  #schema_search_path: "public,postgis"
+  #script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
 
 cucumber:
   <<: *test
