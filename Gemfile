@@ -82,4 +82,4 @@ gem 'squeel'
 
 
 # meetup API
-gem 'rMeetup'
+#gem 'rMeetup'   #deprecated
