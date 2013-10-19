@@ -81,5 +81,5 @@ gem 'geocoder'
 gem 'squeel'
 
 
-# meetup API
-#gem 'rMeetup'   #deprecated
+# for the meetup API
+gem 'rest-client'

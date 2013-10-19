@@ -26,7 +26,7 @@ module MeetupGrabber
       end
 
       def generate_params(params = {})
-        uri_params = params.reject { |k,v| [:action].include?(k) }
+        uri_params = params.reject { |k,v| %w{action controller format}.include?(k) }
         uri_params[:key] = api_key
         uri_params
       end
@@ -40,18 +40,15 @@ module MeetupGrabber
 
     def grab_rough_data(params)
       url = Client.generate_url(:open_events)
-
-      uri = URI(url)
       uri_params = Client.generate_params(params)
-      uri.query = URI.encode_www_form uri_params
 
-      Net::HTTP.get_response uri
+      ##note: to prevent the utf-8 byte sequence issue we must set the proper charset in headers
+      RestClient.get url, {params: uri_params, 'Accept-Charset' => 'utf-8'}
     end
 
     def grab(params)
       response = grab_rough_data params
       hash = ActiveSupport::JSON.decode(response.body)
-      puts hash
       hash
     end
   end

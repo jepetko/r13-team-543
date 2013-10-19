@@ -54,7 +54,9 @@ describe MeetupGrabber::Client do
     it 'should return geojson compatible hash' do
       hash = @grabber.grab @lonlat
       hash.should be_a(Hash)
-      #some validations
+      hash.should have_key('results')
+      results = hash['results']
+      results.should be_a(Array)
     end
 
   end

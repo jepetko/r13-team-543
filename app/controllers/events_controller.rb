@@ -4,15 +4,15 @@ class EventsController < ApplicationController
 
     [:lon,:lat].each do |val|
       if params[val].nil?
-        @data = { error: 'You must submit :lon and :lat!'}
+        @events = { error: 'You must submit :lon and :lat!'}
       end
     end
 
-    @data = { greeting: 'Hallo'} if @data.nil?
+    @events = MeetupGrabber::Client.new.grab params
 
     respond_to do |format|
-      format.json { render json: @data }
-      #format.geojson { }
+      format.json { render json: @events }
+      format.geojson { }
     end
   end
 
