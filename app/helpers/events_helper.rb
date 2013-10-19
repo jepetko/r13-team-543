@@ -1,8 +1,14 @@
 module EventsHelper
 
   def to_properties(event)
-    { id: event['id'], event_url: event['event_url'], #desc: event['description'] }
-      name: event['name'], group: event['group'], venue: event['name'], venue: event['address_1'] }
+    props = { id: event['id'], event_url: event['event_url'], name: event['name'], group: event['group'] }
+    if !event['venue'].nil?
+      venue = event['venue']
+      props['venue_name'] = venue['name']
+      props['venue_address_1'] = venue['address_1']
+      props['venue_city'] = venue['city']
+    end
+    props
   end
 
   def to_geojson(events)
