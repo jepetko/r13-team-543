@@ -22,7 +22,13 @@ module MeetupGrabber
 
       def generate_url(entity)
         return null if !entity_supported?(entity)
-        "#{url}/#{version}/#{entity}.json?api_key=#{api_key}"
+        "#{url}/#{version}/#{entity}.json"
+      end
+
+      def generate_params(params = {})
+        uri_params = params.reject { |k,v| [:action].include?(k) }
+        uri_params[:key] = api_key
+        uri_params
       end
     end
 
@@ -32,16 +38,20 @@ module MeetupGrabber
 
     include BasicSupport
 
-    def grab
-
+    def grab_rough_data(params)
       url = Client.generate_url(:open_events)
 
-      #uri = URI('http://example.com/index.html')
-      #params = { :limit => 10, :page => 3 }
-      #uri.query = URI.encode_www_form(params)
+      uri = URI(url)
+      uri_params = Client.generate_params(params)
+      uri.query = URI.encode_www_form uri_params
 
-      #res = Net::HTTP.get_response(uri)
-      #puts res.body if res.is_a?(Net::HTTPSuccess)
+      Net::HTTP.get_response uri
+    end
+
+    def grab(params)
+      response = grab_rough_data params
+
+
 
     end
 
