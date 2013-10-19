@@ -10,12 +10,18 @@ module EventsHelper
     str = ''
     if !results.nil?
       results.each do |result|
+        venue = result['venue']
+        next if venue.nil?
+
+        lon = venue['lon']
+        lat = venue['lat']
+
         if str != ''
           str << ','
         end
         str << '{"type" : "Feature",'
-        str << "\"id\": #{result[:id]},"
-        str << "\"geometry\": {\"type}\": \"Point\", \"coordinates\": [#{result[:lon]}, #{result[:lat]}]},"
+        str << "\"id\": \"#{result['id']}\","
+        str << "\"geometry\": {\"type\": \"Point\", \"coordinates\": [#{lon}, #{lat}]},"
         str << '"geometry_name" : "SHAPE",'
         str << "\"properties\" : #{to_properties(result).to_json}"
         str << '}'

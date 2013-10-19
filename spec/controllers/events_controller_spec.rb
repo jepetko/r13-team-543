@@ -32,6 +32,10 @@ describe EventsController do
       b = response.body
       b.should =~ /^\{/
       b.should =~ /\}$/
+
+      json = ActiveSupport::JSON.decode(response.body)
+      json['type'].should eq('FeatureCollection')
+      json['features'].should be(Array)
     end
 
   end
