@@ -79,3 +79,7 @@ gem 'activerecord-postgis-adapter'
 gem 'rgeo-geojson'
 gem 'geocoder'
 gem 'squeel'
+
+
+# meetup API
+gem 'rMeetup'
