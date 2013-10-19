@@ -15,5 +15,4 @@ class EventsController < ApplicationController
       format.geojson { }
     end
   end
-
 end
