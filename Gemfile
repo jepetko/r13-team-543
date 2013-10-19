@@ -8,6 +8,7 @@ gem 'rails', '4.0.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -16,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -42,7 +43,7 @@ gem 'jbuilder', '~> 1.2'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'twitter-bootstrap-rails'
 gem 'figaro'
 gem 'pg'
 gem 'simple_form', '>= 3.0.0.rc'

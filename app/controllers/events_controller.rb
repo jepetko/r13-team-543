@@ -11,9 +11,9 @@ class EventsController < ApplicationController
     @data = { greeting: 'Hallo'} if @data.nil?
 
     respond_to do |format|
+      format.html
       format.json { render json: @data }
       #format.geojson { }
     end
   end
-
 end
