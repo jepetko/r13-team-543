@@ -1,0 +1,28 @@
+<div id="queryresults-app" class="accordion" data-ng-controller="QueryResultsCtrl">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="queryresults-app" href="#query-results">
+        <%=t 'views.map.query_results'%>
+        <i class="icon-black" data-ng-class="{true: 'icon-repeat',false: ''}[running]"></i>
+      </a>
+    </div>
+    <div id="query-results" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <span data-ng-show="results.length==0"><%=t('views.map.no_results')%></span>
+        <span data-ng-show="results.length>0">{{results.length}} <%=t('views.map.found')%></span>
+        <div class="table table-striped" data-ng-show="results.length>0" data-add-slim-scroll>
+          <table>
+            <tbody>
+            <tr data-ng-repeat="result in results">
+              <td>{{result.name}}</td>
+              <td>{{result.street}}</td>
+              <td>{{result.zip}}</td>
+              <td>{{result.city}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
