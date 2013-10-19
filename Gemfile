@@ -73,3 +73,9 @@ group :test do
   gem 'email_spec'
 end
 
+# for spatial dimension
+gem 'rgeo'
+gem 'activerecord-postgis-adapter'
+gem 'rgeo-geojson'
+gem 'geocoder'
+gem 'squeel'
