@@ -45,9 +45,16 @@ describe MeetupGrabber::Client do
       @grabber = MeetupGrabber::Client.new
     end
 
-    it 'should return couple of events if we pass lon/lat parameters' do
+    it 'should be able to grab some events if we pass lon/lat parameters' do
       response = @grabber.grab_rough_data @lonlat
       response.should be_a(Net::HTTPSuccess)
+      response.body.should =~ /^\{(.*)\}$/
+    end
+
+    it 'should return geojson compatible hash' do
+      hash = @grabber.grab @lonlat
+      hash.should be_a(Hash)
+      #some validations
     end
 
   end

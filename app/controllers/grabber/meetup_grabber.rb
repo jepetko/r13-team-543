@@ -50,11 +50,9 @@ module MeetupGrabber
 
     def grab(params)
       response = grab_rough_data params
-
-
-
+      hash = ActiveSupport::JSON.decode(response.body)
+      puts hash
+      hash
     end
-
-
   end
 end
