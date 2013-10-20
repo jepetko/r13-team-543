@@ -176,14 +176,17 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                 var style = layer.style || $scope.DEFAULT_POINT_STYLE;
                 var olStyle = null;
                 if( layer.clustered ) {
-                    strategies.push(new OpenLayers.Strategy.Cluster());
+                    strategies.push(new OpenLayers.Strategy.Cluster({threshold : 2}));
                     olStyle = new OpenLayers.Style(style, {
                         context: {
                             radius: function(feature) {
                                 return Math.min(feature.attributes.count, 7) + 8;
                             },
                             label: function(feature) {
-                                return feature.cluster ? feature.cluster.length : '';
+                                return feature.cluster ? feature.cluster.length : 'Here the Event name!';
+                            },
+                            icon: function(feature) {
+                                return feature.cluster ? '' : 'assets/meetup_logo_small.png';
                             }
                         }
                     });
@@ -431,7 +434,11 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                         "strokeColor": "#DE2D26",
                         "fontColor": "#000000",
                         "strokeWidth": 4,
-                        "strokeOpacity": 0.8
+                        "strokeOpacity": 0.8,
+                        //for not clustered features:
+                        externalGraphic: "${icon}",
+                        graphicWidth: 32,
+                        graphicHeight: 24
                     }
                 }, true);
             });
