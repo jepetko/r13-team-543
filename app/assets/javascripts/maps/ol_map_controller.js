@@ -120,10 +120,10 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
             feature.popup.destroy();
             feature.popup = null;
         },
-        'featuresadded' : function(evt) {
+        'loadend' : function(evt) {
             $scope.map.zoomToExtent(evt.object.getDataExtent());
             var results = [];
-            var features = evt.features;
+            var features = evt.response.features;
             $.each(features, function(idx,f) {
                 results.push(f.attributes);
             });
