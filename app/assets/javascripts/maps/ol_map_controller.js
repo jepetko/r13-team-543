@@ -270,7 +270,7 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
     };
 
     $scope.init = function() {
-        var options = {eventListeners: $scope.mapEvents};
+        var options = {eventListeners: $scope.mapEvents, theme: null};
         $scope.map = new OpenLayers.Map($element.attr('id'), options);
         var markers = new OpenLayers.Layer.Markers( $scope.DRAW_MARKERS_LAYER_NAME );
         $scope.map.addLayer(markers);
