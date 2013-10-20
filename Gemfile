@@ -84,3 +84,5 @@ gem 'squeel'
 
 # for the meetup API
 gem 'rest-client'
+
+gem 'capistrano', '~> 2.15'
