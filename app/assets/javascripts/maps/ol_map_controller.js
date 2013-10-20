@@ -29,26 +29,6 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
     $scope.DRAW_EXTENT_LAYER_NAME = 'drawExtent';
     $scope.DRAW_MARKERS_LAYER_NAME = 'markers';
 
-    /**
-     * this will build the info dependent on the feature
-     * @constructor
-     */
-    $scope.InfoBuilder = function() {
-        this.builders = {
-            'clustered' : function() {
-
-            },
-            'ordinary' : function() {
-
-            }
-        };
-
-        this.build = function(feature) {
-            var clustered = feature.layer.strategies[1] instanceof OpenLayers.Strategy.Cluster;
-            this.builders[clustered ? 'clustered' : 'ordinary'].apply(this, arguments);
-        };
-    };
-
     $scope.mapEvents = {
         'moveend' : function() {
             var markers = $scope.map.getLayersBy('CLASS_NAME', 'OpenLayers.Layer.Markers');
@@ -183,7 +163,7 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                                 return Math.min(feature.attributes.count, 7) + 8;
                             },
                             label: function(feature) {
-                                return feature.cluster ? feature.cluster.length : 'Here the Event name!';
+                                return feature.cluster ? feature.cluster.length : '';
                             },
                             icon: function(feature) {
                                 return feature.cluster ? '' : 'assets/meetup_logo_small.png';
@@ -437,8 +417,8 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                         "strokeOpacity": 0.8,
                         //for not clustered features:
                         externalGraphic: "${icon}",
-                        graphicWidth: 32,
-                        graphicHeight: 24
+                        graphicWidth: 60,
+                        graphicHeight: 44
                     }
                 }, true);
             });
