@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require angular.min
 //= require angular-resource
-//= require twitter/bootstrap
+//= require bootstrap
 //= require OpenLayers
 //= require maps/ol_map_controller
 //= require shared/services
