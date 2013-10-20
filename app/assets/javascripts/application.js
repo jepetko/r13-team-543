@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.slimscroll
 //= require angular.min
 //= require angular-resource
 //= require bootstrap

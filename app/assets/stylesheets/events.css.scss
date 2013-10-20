@@ -34,6 +34,7 @@ $width: 400px;
     position: absolute;
     top: 0;
     right: 0;
+    bottom: 0;
     width: $width;
     z-index: 998;
     background-color: #fff;
@@ -74,7 +75,7 @@ $width: 400px;
         width:100%;
 
         #query-results {
-          max-height: 300px;
+          /*max-height: 300px;*/
         }
       }
     }

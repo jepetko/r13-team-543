@@ -2,20 +2,24 @@
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="queryresults-app" href="#query-results">
-        The results of your spatial query:
-        <i class="icon-black" data-ng-class="{true: 'icon-repeat',false: ''}[running]"></i>
+        MeetUp Open Events picked for you:
       </a>
     </div>
     <div id="query-results" class="accordion-body collapse in">
       <div class="accordion-inner">
-        <span data-ng-show="results.length==0">No results!</span>
-        <span data-ng-show="results.length>0">{{results.length}} found in the map</span>
-        <div class="table table-striped" data-ng-show="results.length>0">
+        <span data-ng-show="results.length==0">No results! :-(</span>
+        <span data-ng-show="results.length>0">{{results.length}} found! :-)</span>
+        <div class="table table-striped" data-ng-show="results.length>0" data-add-slim-scroll>
           <table>
             <tbody>
-            <tr data-ng-repeat="result in results">
-              <td>{{result.name}}</td>
-            </tr>
+                <tr data-ng-repeat="result in results">
+                  <td>
+                        <p>{{result.name}}</p>
+                        <p>{{result.venue_name}}</p>
+                        <p>{{result.venue_address_1}}&nbsp;{{result.venue_city}}</p>
+                  </td>
+                  <td><a href="{{result.event_url}}" target="_blank">Go to meetup!</a></td>
+                </tr>
             </tbody>
           </table>
         </div>

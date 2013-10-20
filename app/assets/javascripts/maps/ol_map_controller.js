@@ -119,6 +119,15 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
             $scope.map.removePopup(feature.popup);
             feature.popup.destroy();
             feature.popup = null;
+        },
+        'featuresadded' : function(evt) {
+            $scope.map.zoomToExtent(evt.object.getDataExtent());
+            var results = [];
+            var features = evt.features;
+            $.each(features, function(idx,f) {
+                results.push(f.attributes);
+            });
+            sharedService.setMessage('features-added', [results]);
         }
     };
 
