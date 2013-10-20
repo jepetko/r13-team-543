@@ -14,7 +14,7 @@ queryResultsApp.controller('QueryResultsCtrl', ['$scope', '$element', '$attrs', 
                 break;
         }
     });
-}]).directive('addSlimScroll', function($timeout) {
+}]).directive('addSlimScroll', ['$timeout',function($timeout) {
     return function(scope,element,attrs) {
         $timeout(function() {
             element.slimScroll({
@@ -24,4 +24,4 @@ queryResultsApp.controller('QueryResultsCtrl', ['$scope', '$element', '$attrs', 
             });
         });
     }
-});
+}]);
