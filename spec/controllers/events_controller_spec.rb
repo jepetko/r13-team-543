@@ -22,8 +22,9 @@ describe EventsController do
     end
 
     it 'is failure if parameters are missing' do
-      get :index
-      response.body.should have_content('bad_request')
+      expect {
+        get :index
+      }.to raise_error
     end
 
     it 'is success if spatial parameters are passed' do
@@ -35,7 +36,7 @@ describe EventsController do
 
       json = ActiveSupport::JSON.decode(response.body)
       json['type'].should eq('FeatureCollection')
-      json['features'].should be(Array)
+      json['features'].is_a?(Array).should be_true
     end
 
   end

@@ -47,7 +47,6 @@ describe MeetupGrabber::Client do
 
     it 'should be able to grab some events if we pass lon/lat parameters' do
       response = @grabber.grab_rough_data @lonlat
-      response.should be_a(Net::HTTPSuccess)
       response.body.should =~ /^\{(.*)\}$/
     end
 

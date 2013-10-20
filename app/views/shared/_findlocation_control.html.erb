@@ -1,21 +1,14 @@
 <div id="locationfinders-app" class="accordion" data-ng-controller="LocationFindersCtrl" data-ng-init="init()">
   <div class="accordion-group">
-    <div class="accordion-heading" data-ng-class="{true: 'loading', false:'loading'}[running]">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="locationfinders-app" href="#find-location">
-        <%=t 'views.map.find_location'%>
-        <i class="icon-black" data-ng-class="{true: 'icon-repeat',false: ''}[running]"></i>
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="locationfinders-app" href="#find-location" data-ng-class="{true: 'location-load',false: ''}[running]">
+        Find a certain location. Just enter 'New York' or 'Vienna'!
       </a>
     </div>
-    <div id="find-location" class="accordion-body collapse">
+    <div id="find-location" class="accordion-body collapse in">
       <div class="accordion-inner">
         <div>
-          <%= simple_form_for(Location.new, :url => '#') do |f| %>
-              <% l = Location.name.downcase %>
-              <%= f.input :city, label: t('views.city'), input_html: { 'data-ng-model' => "#{l}.city"} %>
-              <%= button_tag(type: 'button', class: 'btn btn-primary', 'data-ng-click' => 'doFind();') do %>
-                  <i class="icon-white {{lastQualityClass}}"></i>&nbsp;Find location!
-              <% end %>
-          <% end %>
+          <input type="text" id="str" data-ng-model="location.str">
         </div>
       </div>
     </div>

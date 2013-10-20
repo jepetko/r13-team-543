@@ -19,5 +19,6 @@
 //= require OpenLayers
 //= require maps/ol_map_controller
 //= require sidebar/queryresults_controller
+//= require sidebar/locationfinders_controller
 //= require shared/services
 //= require maps

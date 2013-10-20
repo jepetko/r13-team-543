@@ -403,6 +403,16 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
             case 'tool-changed':
                 $scope.changeTool(obj);
                 break;
+            case 'location-changed':
+                var lon = obj['lon'];
+                var lat = obj['lat'];
+                var layer = $scope.map.getLayersByName('Events')[0];
+                layer.protocol = new OpenLayers.Protocol.HTTP({
+                    url: "/events.geojson?lon=" + lon + '&lat=' + lat,
+                    format: new OpenLayers.Format.GeoJSON()
+                });
+                layer.refresh();
+                break;
         }
     });
 
