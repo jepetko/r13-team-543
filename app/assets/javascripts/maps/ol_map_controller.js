@@ -175,7 +175,7 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                                 return feature.cluster ? feature.cluster.length : '';
                             },
                             icon: function(feature) {
-                                return feature.cluster ? '' : 'assets/meetup_logo_small.png';
+                                return feature.cluster ? '' : MEETUP_LOGO_PATH;  //global variable supplied by Rails
                             }
                         }
                     });
