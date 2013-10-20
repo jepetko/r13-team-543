@@ -26,6 +26,9 @@ Railsrumble::Application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
+  ####kg:
+  config.assets.precompile += %w( bootstrap.css )
+
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
