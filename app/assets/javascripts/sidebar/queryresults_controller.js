@@ -8,10 +8,18 @@ queryResultsApp.controller('QueryResultsCtrl', ['$scope', '$element', '$attrs', 
         switch(msg) {
             //notification from the ol_map_controller
             case 'features-added':
-            case 'features-marked':
                 $scope.results = obj;
                 $scope.$apply();
                 break;
+            case 'features-selected':
+                if( obj ) {
+                    $.each($scope.results, function(idx,result) {
+                        result.selected = ($.inArray(result.id, obj) !== -1);
+                    });
+                    $scope.$apply();
+                }
+                break;
+            default:
         }
     });
 }]).directive('addSlimScroll', ['$timeout',function($timeout) {

@@ -13,8 +13,7 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
         projection: new OpenLayers.Projection("EPSG:102113"),
         units: "m",
         numZoomLevels: 18,
-        maxResolution: 156543.0339,
-        maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34)
+        maxResolution: 156543.0339
     };
 
     $scope.DEFAULT_POINT_STYLE = {
@@ -47,12 +46,19 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
             this.layer.destroyFeatures();
         },
         'featureadded' : function(evt) {
-            var wkt = new OpenLayers.Format.WKT();
-            wkt.internalProjection = $scope.projection.projection;
-            wkt.externalProjection = new OpenLayers.Projection('EPSG:4326');
-
-            var result = wkt.write(evt.feature);
-            sharedService.setMessage('feature-added', result);
+            var ids = [];
+            var layer = $scope.map.getLayersByName('Events')[0];
+            for(var i=0; i<layer.features.length; i++) {
+                var f = layer.features[i];
+                f = f.cluster ? f.cluster : [f];
+                for(var j=0; j< f.length;j++) {
+                    var subF = f[j];
+                    if( evt.feature.geometry.intersects(subF.geometry) ) {
+                        ids.push(subF.attributes['id']);
+                    }
+                }
+            }
+            sharedService.setMessage('features-selected', [ids]);
         }
     };
 
@@ -244,7 +250,7 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
             }
 
             var controls = $scope.getToolsBy('layer', olLayer);
-
+            var createdControl = null;
             if( controls.length == 0) {
                 var control = new OpenLayers.Control.DrawFeature(olLayer,
                     OpenLayers.Handler.RegularPolygon,
@@ -257,7 +263,9 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                 $.each(controls, function(idx,control) {
                     control.activate();
                 });
+                //Possible bug: could there be more than one control?
             }
+            return $scope.getToolsBy('layer', olLayer)[0];
         }
     };
 
@@ -266,6 +274,8 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
         $scope.map = new OpenLayers.Map($element.attr('id'), options);
         var markers = new OpenLayers.Layer.Markers( $scope.DRAW_MARKERS_LAYER_NAME );
         $scope.map.addLayer(markers);
+
+        //$scope.map.addControl(new OpenLayers.Control.MousePosition());
     };
 
     $scope.addLayer = function(type,layer) {
@@ -284,9 +294,10 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
         $scope.deactivateTools();
         if( tool ) {
             var adder = $scope.toolAdder[tool.type];
-            if(!adder) return;
-            adder.call(this,tool);
+            if(!adder) return null;
+            return adder.call(this,tool);
         }
+        return null;
     };
 
     $scope.deactivateTools = function() {
@@ -431,6 +442,12 @@ mapApp.controller('OLMapCtrl', ['$scope', '$element', '$attrs', 'sharedService',
                     }
                 }, true);
             });
+            var tool = scope.changeTool( {
+                "id": "extent",
+                "type": "drawExtent"
+            });
+            tool.handler.stopDown = false;
+            tool.handler.stopUp = false;
         }
     })($scope, $window), 2000);
 

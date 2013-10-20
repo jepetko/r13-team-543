@@ -122,3 +122,8 @@ $width: 400px;
 #expanders-app span {
   display: block;
 }
+
+#query-results table tr.event-selected {
+  border: 2px dotted #F08080;
+  background: rgba(211, 211, 211, 0.24);
+}

@@ -12,7 +12,7 @@
         <div class="table table-striped" data-ng-show="results.length>0" data-add-slim-scroll>
           <table>
             <tbody>
-                <tr data-ng-repeat="result in results">
+                <tr data-ng-repeat="result in results" data-ng-class="{true: 'event-selected',false: ''}[result.selected]">
                   <td>
                         <p>{{result.name}}</p>
                         <p>{{result.venue_name}}</p>
