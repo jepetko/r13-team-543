@@ -2,13 +2,15 @@
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="queryresults-app" href="#query-results">
-        MeetUp Open Events picked for you:
+        MeetUp Open Events near by you.
       </a>
     </div>
     <div id="query-results" class="accordion-body collapse in">
       <div class="accordion-inner">
         <p data-ng-show="results.length==0" style="width: 100%;text-align:center;">No results! Wait... :-(</p>
-        <p data-ng-show="results.length>0" style="width: 100%;text-align:center;">{{results.length}} found! :-)</p>
+        <p data-ng-show="results.length>0" style="width: 100%;text-align:center;">{{results.length}} found! :-).
+          <br><br><span style="font-weight:bold;text-decoration:underline;">Our tip:</span> just press the Shift key and draw a rectangle in the map to mark some events!
+        </p>
         <div class="table table-striped" data-ng-show="results.length>0" data-add-slim-scroll>
           <table>
             <tbody>
