@@ -1,3 +1,123 @@
 // Place all the styles related to the grabbers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin vendor-prefix($name, $value) {
+  #{$name}: #{$value};
+  -webkit-#{$name}: #{$value};
+  -ms-#{$name}: #{$value};
+  -moz-#{$name}: #{$value};
+  -o-#{$name}: #{$value};
+}
+
+@mixin keyframes( $animationName ) {
+  @-webkit-keyframes $animationName {
+    @content;
+  }
+  @-moz-keyframes $animationName {
+    @content;
+  }
+  @-o-keyframes $animationName {
+    @content;
+  }
+  @keyframes $animationName {
+    @content;
+  }
+}
+
+$width: 400px;
+
+#map-tools-perspective {
+  /*@include vendor-prefix(perspective, '400px');*/
+
+  #map-tools {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $width;
+    z-index: 998;
+    background-color: #fff;
+    opacity: .95;
+    padding: 10px;
+    outline: 1px solid transparent;
+
+    @include vendor-prefix(border-bottom-left-radius,5px);
+    @include vendor-prefix(animation-fill-mode, 'forwards');
+    @include vendor-prefix(transform-origin,'right');
+
+    .accordion {
+      margin-bottom: 0px;
+    }
+
+    #map-tools-inner {
+      #tools-app {
+        float: left;
+        width: 100%;
+      }
+
+      #layers-app {
+        float: left;
+        width: 100%;
+      }
+
+      #locationfinders-app {
+        float: left;
+        width: 100%;
+
+        .loading {
+          /* more additional styling here*/
+        }
+      }
+
+      #queryresults-app {
+        float: left;
+        width:100%;
+
+        #query-results {
+          max-height: 300px;
+        }
+      }
+    }
+  }
+}
+
+.map-tools-expanded {
+  @include vendor-prefix(animation, 'expand-anim 2s');
+}
+
+@include keyframes('expand-anim') {
+  from {
+    @include vendor-prefix(transform, 'translateX(0deg)');
+    @include vendor-prefix(opacity, 1.0);
+  }
+  to {
+    @include vendor-prefix(transform, "translateX(#{$width})");
+    @include vendor-prefix(opacity, 0.0);
+  }
+}
+
+.map-tools-collapsed {
+  @include vendor-prefix(animation, 'collapse-anim 2s');
+}
+
+@include keyframes('collapse-anim') {
+  from {
+    @include vendor-prefix(transform, "translateX(#{$width})");
+    @include vendor-prefix(opacity, 0.0);
+  }
+  to {
+    @include vendor-prefix(transform, 'translateX(0deg)');
+    @include vendor-prefix(opacity, 1.0);
+  }
+}
+
+#expanders-app {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+}
+
+#expanders-app span {
+  display: block;
+}

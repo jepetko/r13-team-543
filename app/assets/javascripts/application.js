@@ -17,5 +17,6 @@
 //= require bootstrap
 //= require OpenLayers
 //= require maps/ol_map_controller
+//= require sidebar/queryresults_controller
 //= require shared/services
 //= require maps
